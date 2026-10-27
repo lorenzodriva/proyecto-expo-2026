@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Inicio — Diario Fray</title>
+
+  <meta name="description" content="Diario Fray: el periódico online de la comunidad educativa, hecho por los alumnos de 6to A Informática.">
+
+  <meta property="og:title" content="Inicio — Diario Fray">
+  <meta property="og:description" content="Diario Fray: el periódico online de la comunidad educativa, hecho por los alumnos de 6to A Informática.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="img/logo-diario-fray.png">
+
+  <link rel="icon" href="img/LOGO-FRAY.jpg">
+  <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/extra.css">
+
+  <style>
+    /* Distribución de la portada */
+    .destacado {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .destacado__nota {
+      min-width: 0;
+    }
+
+    .destacado__imagen {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Columna de tarjetas */
+    .breves {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+      padding-top: 6px;
+    }
+
+    /* Tarjetas de artículos */
+    .articulo-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 120px;
+      padding: 22px 20px;
+      box-sizing: border-box;
+
+      background: #f8f5ed;
+      border: 1px solid #ded5c4;
+      border-top: 3px solid #851d2a;
+      border-radius: 4px;
+
+      color: #25221e;
+      text-decoration: none;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+    }
+
+    .articulo-card:hover {
+      transform: translateY(-3px);
+      background: #fffdf8;
+      box-shadow: 0 6px 18px rgb(40 30 20 / 10%);
+    }
+
+    .articulo-card:focus-visible {
+      outline: 3px solid #851d2a;
+      outline-offset: 4px;
+    }
+
+    .articulo-card__contenido {
+      min-width: 0;
+    }
+
+    .articulo-card__categoria {
+      display: block;
+      margin-bottom: 8px;
+      color: #851d2a;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .articulo-card h2 {
+      margin: 0 0 8px;
+      color: #24211e;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.4rem;
+    }
+
+    .articulo-card p {
+      margin: 0;
+      color: #6d675e;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .articulo-card__flecha {
+      flex-shrink: 0;
+      color: #851d2a;
+      font-size: 1.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .articulo-card:hover .articulo-card__flecha {
+      transform: translateX(5px);
+    }
+
+    /* Adaptación a celulares y pantallas pequeñas */
+    @media (max-width: 760px) {
+      .destacado {
+        grid-template-columns: 1fr;
+      }
+
+      .breves {
+        padding-top: 0;
+      }
+
+      .articulo-card {
+        min-height: 100px;
+      }
+    }
+
+    /* Accesibilidad: reducir animaciones si está configurado */
+    @media (prefers-reduced-motion: reduce) {
+      .articulo-card,
+      .articulo-card__flecha {
+        transition: none;
+      }
+
+      .articulo-card:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#contenido">
+    Saltar al contenido
+  </a>
+
+  <!-- Encabezado -->
+  <header class="site-header">
+
+    <div class="container flag-line">
+    </div>
+
+    <div class="masthead">
+      <a href="index.html">
+        <img
+          class="masthead__logo"
+          src="img/LOGO-FRAY.jpg"
+          alt="Diario Fray"
+        >
+      </a>
+
+      <p class="masthead__tagline">
+        El diario de la comunidad educativa
+      </p>
+    </div>
+
+    <!-- Navegación principal -->
+    <nav class="site-nav" aria-label="Navegación principal">
+
+      <button
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="menu"
+      >
+        Menú
+      </button>
+
+      <ul id="menu">
+        <li>
+          <a href="index.html" aria-current="page">Inicio</a>
+        </li>
+        <li>
+          <a href="calendario.html">Calendario</a>
+        </li>
+        <li>
+          <a href="comunidad-educativa.html">Comunidad Educativa</a>
+        </li>
+        <li>
+          <a href="anuario.html">Anuario</a>
+        </li>
+      </ul>
+
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <main id="contenido" class="portada">
+
+    <div class="container">
+
+      <section class="destacado" aria-label="Notas destacadas">
+
+        <!-- Nota principal con imagen -->
+        <article class="destacado__nota">
+
+          <img
+            class="destacado__imagen"
+            src="img/foto-escuela-fray.jpg"
+            alt="Foto de la escuela Fray"
+          >
+
+          <p class="destacado__meta">
+            Institucional
+          </p>
+
+          <h1>
+              Se viene la Expo Fray 2026: así se preparan los talleres
+            </a>
+          </h1>
+
+          <p class="destacado__bajada">
+            Los distintos cursos ya definieron sus proyectos para la
+            muestra anual. Repasamos qué se va a exhibir y cómo
+            colaboraron los equipos de cada especialidad para llegar
+            a tiempo.
+          </p>
+
+          </a>
+
+        </article>
+
+        <!-- Cards a la derecha de la imagen -->
+        <aside class="breves" aria-label="Artículos relacionados">
+
+          <!-- Card de apuestas -->
+          <a class="articulo-card" href="apuestas.html">
+
+            <div class="articulo-card__contenido">
+
+              <span class="articulo-card__categoria">
+                Comunidad educativa
+              </span>
+
+              <h2>Apuestas</h2>
+
+              <p>
+                Descubrí el artículo sobre apuestas.
+              </p>
+
+            </div>
+
+            <span class="articulo-card__flecha" aria-hidden="true">
+              
+            </span>
+
+          </a>
+
+          <!-- Card de proyectos -->
+          <a class="articulo-card" href="proyectos.html">
+
+            <div class="articulo-card__contenido">
+
+              <span class="articulo-card__categoria">
+                Institucional
+              </span>
+
+              <h2>Proyectos</h2>
+
+              <p>
+                Conocé los proyectos de nuestra comunidad.
+              </p>
+
+            </div>
+
+            <span class="articulo-card__flecha" aria-hidden="true">
+              
+            </span>
+
+          </a>
+
+          <!-- Card de historia -->
+          <a class="articulo-card" href="historia.html">
+
+            <div class="articulo-card__contenido">
+
+              <span class="articulo-card__categoria">
+                Nuestra escuela
+              </span>
+
+              <h2>Historia</h2>
+
+              <p>
+                Conocé la historia del Instituto Fray Luis Beltrán.
+              </p>
+
+            </div>
+
+            <span class="articulo-card__flecha" aria-hidden="true">
+              
+            </span>
+
+          </a>
+
+        </aside>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Pie de página -->
+  <footer class="site-footer">
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <h4>Diario Fray</h4>
+
+          <p>
+            Proyecto realizado por los alumnos de 6to A de Informática
+            para la Expo Fray 2026.
+          </p>
+        </div>
+
+        <div>
+          <h4>Secciones</h4>
+
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="calendario.html">Calendario</a></li>
+            <li>
+              <a href="comunidad-educativa.html">
+                Comunidad Educativa
+              </a>
+            </li>
+            <li><a href="anuario.html">Anuario</a></li>
+          </ul>
+        </div>
+
+        <div>
+
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2026 Diario Fray. Todos los derechos reservados.
+        </p>
+      </div>
+
+    </div>
+
+  </footer>
+
+  <script src="js/nav.js"></script>
+
+</body>
+</html>
