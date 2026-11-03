@@ -1,0 +1,139 @@
+@import url(globals.css);
+@import url(index.css);
+
+body {
+    background: #eae2cd;
+  }
+  
+  /* Carrusel sin animaciones: el cambio de mes es instantáneo */
+  .carousel-item,
+  .carousel-item-next,
+  .carousel-item-prev,
+  .carousel-item.active {
+    transition: none !important;
+  }
+  
+  #calendario {
+    padding: 0 2.75rem;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 2.5rem;
+    opacity: 1;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    filter: invert(1) grayscale(1); /* íconos oscuros sobre fondo claro */
+  }
+  
+  .mes-titulo {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .grilla {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  
+  .cab {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #6c757d;
+    padding: 0.25rem 0;
+  }
+  
+  .dia {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    min-height: 84px;
+    padding: 4px 6px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .dia.vacio {
+    background: transparent;
+    border: none;
+  }
+  
+  .num {
+    font-weight: 600;
+  }
+  
+  .dia.finde .num {
+    color: #6c757d;
+  }
+  
+  .etiqueta {
+    margin-top: auto;
+    font-size: 0.68rem;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+  
+  /* Tipos de fecha */
+  .dia.feriado    { background: #fde2e4; border-color: #e5989b; }
+  .dia.feriado .etiqueta,
+  .dia.feriado .num { color: #9d0208; }
+  
+  .dia.turistico  { background: #fff0d6; border-color: #f4a261; }
+  .dia.turistico .etiqueta,
+  .dia.turistico .num { color: #9a5b00; }
+  
+  .dia.festividad { background: #e0efff; border-color: #8ab4f8; }
+  .dia.festividad .etiqueta,
+  .dia.festividad .num { color: #0b4f9c; }
+
+  .dia.escuela { background: hsla(46, 92%, 76%, 0.774); border-color: hsl(46, 94%, 57%); }
+  .dia.escuela .etiqueta,
+  .dia.escuela .num { color: #c28412; }
+  
+  .dia.hoy {
+    outline: 3px solid #0d6efd;
+    outline-offset: -2px;
+  }
+  
+  /* Lista de fechas debajo de cada mes */
+  .lista-fechas {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    columns: 2;
+    font-size: 0.9rem;
+  }
+  
+  /* Leyenda */
+  .leyenda {
+    font-size: 0.9rem;
+  }
+  
+  .punto {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1px solid #adb5bd;
+    vertical-align: middle;
+  }
+  
+  .punto.feriado    { background: #fde2e4; border-color: #e5989b; }
+  .punto.turistico  { background: #fff0d6; border-color: #f4a261; }
+  .punto.festividad { background: #e0efff; border-color: #8ab4f8; }
+  .punto.escuela    { background: hsla(46, 92%, 76%, 0.774); border-color: hsl(46, 94%, 57%); }
+  .punto.hoy        { background: #fff; border: 2px solid #0d6efd; }
+  
+  /* Celulares */
+  @media (max-width: 576px) {
+    #calendario { padding: 0 2.25rem; }
+    .dia { min-height: 56px; padding: 2px 3px; }
+    .etiqueta { font-size: 0.55rem; }
+    .lista-fechas { columns: 1; }
+  }
