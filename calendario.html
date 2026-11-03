@@ -2,19 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calendario — Diario Fray</title>
-  <meta name="description" content="Fechas importantes de la comunidad educativa y de la Expo Fray 2026.">
-  <meta property="og:title" content="Calendario — Diario Fray">
-  <meta property="og:description" content="Fechas importantes de la comunidad educativa y de la Expo Fray 2026.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="img/logo-diario-fray.png">
-  <link rel="icon" href="img/LOGO-FRAY.jpg">
-  <link rel="stylesheet" href="styles/globals.css">
-  <link rel="stylesheet" href="styles/index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calendario Sep 2026 – Mar 2027</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/calendario.css">
 </head>
-<body>
 
+<body>
   <a class="skip-link" href="#contenido">
     Saltar al contenido
   </a>
@@ -67,17 +61,122 @@
 
     </nav>
   </header>
-  
-  <!-- Contenido principal -->
-  <main id="contenido">
-    <div class="container">
-      <!-- Contenido principal vacío listo para usar -->
+
+  <main class="container py-4">
+    <h1 class="text-center mb-4">Calendario 2026 – 2027</h1>
+
+    <!-- Carrusel: sin autoplay (data-bs-interval="false") y sin animación (ver CSS) -->
+    <div id="calendario" class="carousel slide" data-bs-interval="false">
+      <div class="carousel-inner" id="meses"></div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#calendario" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Mes anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#calendario" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Mes siguiente</span>
+      </button>
+    </div>
+
+    <div class="leyenda d-flex flex-wrap justify-content-center gap-3 mt-4">
+      <span><i class="punto feriado"></i> Feriado nacional</span>
+      <span><i class="punto turistico"></i> Día no laborable / puente</span>
+      <span><i class="punto festividad"></i> Festividad / fecha especial</span>
+      <span><i class="punto escuela"></i> Eventos Escolares</span>
+      <span><i class="punto hoy"></i> Hoy</span>
     </div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // tipo: feriado | turistico | festividad
+    const FECHAS = {
+      // 2026
+      "2026-09-11": { tipo: "festividad", nombre: "Día del Maestro" },
+      "2026-09-21": { tipo: "festividad", nombre: "Día del Estudiante" },
+      "2026-09-22": { tipo: "escuela", nombre: "Fiesta Colores Menores" },
+      "2026-09-23": { tipo: "escuela", nombre: "Fiesta Colores Cadetes" },
+      "2026-09-24": { tipo: "escuela", nombre: "Fiesta Colores Juveniles" },
+      "2026-10-12": { tipo: "feriado",    nombre: "Diversidad Cultural" },
+      "2026-10-18": { tipo: "festividad", nombre: "Día de la Madre" },
+      "2026-10-31": { tipo: "festividad", nombre: "Halloween" },
+      "2026-11-06": { tipo: "escuela", nombre: "Expo fray" },
+      "2026-11-07": { tipo: "escuela", nombre: "Expo fray" },
+      "2026-11-09": { tipo: "feriado",    nombre: "Visita del Papa" },
+      "2026-11-23": { tipo: "feriado",    nombre: "Día de la Soberanía" },
+      "2026-12-07": { tipo: "turistico",  nombre: "Puente turístico" },
+      "2026-12-08": { tipo: "feriado",    nombre: "Inmaculada Concepción" },
+      "2026-12-24": { tipo: "festividad", nombre: "Nochebuena" },
+      "2026-12-25": { tipo: "feriado",    nombre: "Navidad" },
+      "2026-12-31": { tipo: "festividad", nombre: "Nochevieja" },
+      // 2027
+      "2027-01-01": { tipo: "feriado",    nombre: "Año Nuevo" },
+      "2027-01-06": { tipo: "festividad", nombre: "Reyes Magos" },
+      "2027-02-08": { tipo: "feriado",    nombre: "Carnaval" },
+      "2027-02-09": { tipo: "feriado",    nombre: "Carnaval" },
+      "2027-03-08": { tipo: "festividad", nombre: "Día de la Mujer" },
+      "2027-03-24": { tipo: "feriado",    nombre: "Día de la Memoria" },
+      "2027-03-25": { tipo: "turistico",  nombre: "Jueves Santo" },
+      "2027-03-26": { tipo: "feriado",    nombre: "Viernes Santo" },
+      "2027-03-28": { tipo: "festividad", nombre: "Pascua" },
+    };
+
+    const NOMBRES_MES = [
+        "Enero","Febrero","Marzo",
+        "Abril","Mayo","Junio",
+        "Julio","Agosto","Septiembre",
+        "Octubre","Noviembre","Diciembre"
+    ];
+    const NOMBRES_DIA = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
+
+    const clave = (y, m, d) =>
+      `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+
+    const hoy = new Date();
+    const claveHoy = clave(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+
+    const contenedor = document.getElementById("meses");
+
+    // Septiembre 2026 (mes 8) + 6 meses = Marzo 2027
+    for (let i = 0; i < 7; i++) {
+      const mes = (8 + i) % 12;
+      const anio = 2026 + Math.floor((8 + i) / 12);
+      const diasDelMes = new Date(anio, mes + 1, 0).getDate();
+      const offset = (new Date(anio, mes, 1).getDay() + 6) % 7; // semana desde lunes
+
+      let celdas = NOMBRES_DIA.map(d => `<div class="cab">${d}</div>`).join("");
+      for (let v = 0; v < offset; v++) celdas += `<div class="dia vacio"></div>`;
+
+      let lista = "";
+      for (let d = 1; d <= diasDelMes; d++) {
+        const k = clave(anio, mes, d);
+        const info = FECHAS[k];
+        const col = (offset + d - 1) % 7;
+        const clases = ["dia"];
+        if (col >= 5) clases.push("finde");
+        if (info) clases.push(info.tipo);
+        if (k === claveHoy) clases.push("hoy");
+
+        celdas += `<div class="${clases.join(" ")}" ${info ? `title="${info.nombre}"` : ""}>
+          <span class="num">${d}</span>
+          ${info ? `<span class="etiqueta">${info.nombre}</span>` : ""}
+        </div>`;
+
+        if (info) lista += `<li><i class="punto ${info.tipo}"></i> <strong>${d}</strong> – ${info.nombre}</li>`;
+      }
+
+      contenedor.insertAdjacentHTML("beforeend", `
+        <div class="carousel-item ${i === 0 ? "active" : ""}">
+          <h2 class="mes-titulo">${NOMBRES_MES[mes]} ${anio}</h2>
+          <div class="grilla">${celdas}</div>
+          <ul class="lista-fechas">${lista}</ul>
+        </div>`);
+    }
+  </script>
+
   <!-- Pie de página -->
   <footer class="site-footer">
-
     <div class="container">
 
       <div class="footer-grid">
@@ -119,10 +218,8 @@
       </div>
 
     </div>
-
   </footer>
 
   <script src="js/nav.js"></script>
-
 </body>
 </html>
